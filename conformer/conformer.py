@@ -149,7 +149,7 @@ class ConformerConvModule(nn.Module):
         padding = calc_same_padding(kernel_size) if not causal else (kernel_size - 1, 0)
 
         self.net = nn.Sequential(
-            nn.LayerNorm(dim),
+            nn.LayerNorm(dim),#1*1024*512->1*1024*512
             Rearrange('b n c -> b c n'),
             nn.Conv1d(dim, inner_dim * 2, 1),
             GLU(dim=1),
