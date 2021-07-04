@@ -151,7 +151,7 @@ class ConformerConvModule(nn.Module):
         self.net = nn.Sequential(
             nn.LayerNorm(dim),#1*1024*512->1*1024*512
             Rearrange('b n c -> b c n'),#1*512*1024
-            nn.Conv1d(dim, inner_dim * 2, 1),#1*2048*512
+            nn.Conv1d(dim, inner_dim * 2, 1),#1*2048*1024
             GLU(dim=1),#1*1024*1024
             DepthWiseConv1d(inner_dim, inner_dim, kernel_size = kernel_size, padding = padding),#1*1024*1024
             nn.BatchNorm1d(inner_dim) if not causal else nn.Identity(),#1*1024*1024
